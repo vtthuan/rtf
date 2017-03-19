@@ -1,0 +1,17 @@
+
+
+
+{% if(buyings|length > 0 ) %}
+    {% for buying in buyings %}
+        <tr>
+            <td><a href="{{ path('post_detail_full', { slug: buying.post.slug, language : app.user.nativeLanguage.code, token: buying.token }) }}">
+                    {{ buying.post.title}}
+                </a></td>
+            <td>{{ buying.post.publicationDateStart|localizeddate('medium', 'none') }}</td>                
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="4" align="center">{{ 'buying.no_posts_found'|trans }}</td>
+    </tr>
+{% endif %}

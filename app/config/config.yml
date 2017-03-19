@@ -1,0 +1,118 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+    # FriendOfSymfony Bundles
+    - { resource: fos/fos_user.yml }
+    - { resource: fos/fos_rest.yml }
+    - { resource: fos/fos_elastica.yml }
+
+    # Sonata Feature Bundles
+    - { resource: sonata/sonata_admin.yml }
+    - { resource: sonata/sonata_formatter.yml }
+    - { resource: sonata/sonata_block.yml }
+    - { resource: sonata/sonata_user.yml }
+    - { resource: sonata/sonata_news.yml }
+    - { resource: sonata/sonata_media.yml }
+    - { resource: sonata/sonata_classification.yml }
+
+    #JMS
+    - { resource: jms/payment.yml }
+
+    #Assetic
+    - { resource: assetic.yml }  
+
+    #Others
+    - { resource: admin/admin.yml}
+    - { resource: hwi/hwi_oauth.yml}
+    - { resource: antimattr/google_services.yml}
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+    MaxPerPage : 2
+
+framework:
+    #esi:             ~
+    translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+    base_template_class: Sonata\CacheBundle\Twig\TwigTemplate14
+
+    globals:
+        languageLearning : "%languageLearning%"
+        defaultNativeLanguage : "%defaultNativeLanguage%"
+    form:
+        resources:
+            # - 'SonataFormatterBundle:Form:formatter.html.twig'
+            # - 'SonataMediaBundle:Form:media_widgets.html.twig'
+            - 'SonataCoreBundle:Form:datepicker.html.twig'
+
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: default
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings: ~
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+    
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+

@@ -1,0 +1,93 @@
+fos_elastica:
+    clients:
+        default: { host: %elastic_host%, port: %elastic_port% }
+
+    indexes:
+        sonata_admin:
+            index_name: app_%kernel.environment%
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            autocomplete_analyzer:
+                                type: custom
+                                tokenizer: autocomplete_tokenizer
+                                filter: [lowercase, asciifolding]
+                        tokenizer:
+                            autocomplete_tokenizer:
+                                type: nGram
+                                min_gram: 3
+                                max_gram: 20
+
+            types:
+                # Blog Bundle
+                post:                    
+                    mappings:
+                        title : { type: string, analyzer: autocomplete_analyzer }
+
+                    persistence:
+                        driver: orm
+                        model:                  Application\Sonata\NewsBundle\Entity\Post
+                        provider: 
+                            query_builder_method: getAllActivePosts
+                            batch-size : 10
+                        listener:
+                            logger: true
+                        finder: ~
+
+#                comment:
+#                    serializer:                 { groups: ['sonata_search'] }
+#                    mappings:
+#                        name:                   { boost: 5 }
+#                        url:                    ~
+#                        email:                  ~
+#                        message:                ~
+#                        status:                 { type: integer }
+#                        created_at:             { type: date }
+#                        updated_at:             { type: date }
+
+
+#                    persistence:
+#                        model:                  Application\Sonata\NewsBundle\Entity\Comment
+#                        provider:               ~
+
+                # Classification Bundle
+#                collection:
+#                    serializer:   { groups: ['sonata_search'] }
+#                    mappings:
+#                        name:                   ~
+#                        enabled:                { type: boolean }
+#                        slug:                   ~
+#                        description:            ~
+#                        created_at:             { type: date }
+#                        updated_at:             { type: date }
+#
+#                    persistence:
+#                        model:    Application\Sonata\ClassificationBundle\Entity\Collection
+#                        provider: ~
+#
+#                tag:
+#                    serializer:   { groups: ['sonata_search'] }
+#                    mappings:
+#                        name:                   ~
+#                        enabled:                { type: boolean }
+#                        slug:                   ~
+#                        created_at:             { type: date }
+#                        updated_at:             { type: date }
+#
+#                    persistence:
+#                        model:    Application\Sonata\ClassificationBundle\Entity\Tag
+#                        provider: ~
+#
+#                category:
+#                    serializer:   { groups: ['sonata_search'] }
+#                    mappings:
+#                        name:                   ~
+#                        enabled:                { type: boolean }
+#                        slug:                   ~
+#                        created_at:             { type: date }
+#                        updated_at:             { type: date }
+#
+#                    persistence:
+#                        model:    Application\Sonata\ClassificationBundle\Entity\Category
+#                        provider: ~

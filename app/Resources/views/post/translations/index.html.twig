@@ -1,0 +1,20 @@
+{% for translation in translations %}
+    <article class="post">
+        -{% if translation.type == "VER" %}
+            {{translation.formatType}}:
+            {% if translation.isLem == false %}
+                du 
+            {%endif%}
+            <strong>{{translation.lemme}}</strong> - <a href="http://leconjugueur.lefigaro.fr/conjugaison/verbe/{{translation.lemme}}.html" target="_blank">Conjuguer</a>
+        {% else%}
+            {{translation.formatType}}:
+            {% if translation.isLem == false %}
+                sous forme {{translation.formatGerder}} {{translation.formatNumber}} du
+            {%endif%}
+            <strong>{{translation.lemme}}</strong>
+        {%endif%}
+        <a href='http://vdict.com/{{translation.lemme}},5,0,0.html' target='_blank'>Translate</a>
+    </article>
+{% endfor %}
+            
+

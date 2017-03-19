@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% for ticket in tickets %}
+        <article class="post">
+            <h2>
+                    {{ ticket.name }}
+            </h2>
+			<h3>
+                    {{ ticket.quantity }}
+            </h3>
+			<h3>
+                    {{ ticket.price }}
+            </h3>
+            
+            
+            <a href="{{ path('payment', { id: ticket.id }) }}">
+                    {{ ticket.name }}
+            </a>
+
+        </article>
+    {% endfor %}
+            
+{% endblock %}

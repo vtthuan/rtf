@@ -1,0 +1,18 @@
+services:
+    sonata.admin.language:
+        class: AppBundle\Admin\LanguageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Language" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Language
+            - ~
+            
+    sonata.admin.subtitle:
+        class: AppBundle\Admin\SubtitleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Subtitle" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Subtitle
+            - ~

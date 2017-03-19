@@ -1,0 +1,51 @@
+{% extends 'post/post.html.twig' %}
+
+{% block custom_body %}
+    <div id="login" style="display:none" class="signin video-signin">
+        <a href="{{ path('fos_user_security_login') }}" class="play-icon">
+            S'identifier
+        </a>
+    </div>
+{#        {{ form_start(form) }}
+        {{ form_widget(form) }}
+            <div id="confirm" style="display:none">
+                {% if app.user %} Your balance is {{app.user.balance}} .Confirm to use ticket ?{% endif %}               
+                <input type="submit" name="useTicket" value="{{ 'label.confirm'|trans }}" class="btn btn-primary" />
+            </div>
+    {{ form_end(form) }}
+    <div id="buying" style="display:none">
+        {% if app.user %} Your balance is {{app.user.balance}}{% endif %}.Buy a ticket ? <a href="{{ path('tickets_index') }}">
+            {{ 'ticket.buy'|trans }}
+        </a>
+    </div>#}
+{% endblock %}
+
+{% block custom_script %}
+    
+    function forceLogin(){
+	$('.html5-main-video').addClass('overlay');
+    $('#login').show();
+    }
+
+    function showProposition(){
+    $('#confirm').show();
+    }
+
+    function showBuying(){
+    $('#buying').show();
+    }
+
+    function controlFlow(mediaElement)
+    {
+        <!-- if( media.currentTime > media.duration * 10 /100) -->
+        if( mediaElement.currentTime > 10)			
+        {                          
+            {% if not app.user %}
+                //show div to ask user that he has to login
+                mediaElement.pause();  
+                forceLogin();
+            {% endif %}
+        }        
+    }
+
+{% endblock %}

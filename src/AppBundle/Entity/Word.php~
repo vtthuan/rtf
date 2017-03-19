@@ -1,0 +1,59 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Table(name="words")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\WordRepository")
+ */
+class Word extends UpdatableEntity
+{
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    private $text;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    private $lemme;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    private $type;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $gender;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $number;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $form;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isLem;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $possibleTypes;
+
+
+}

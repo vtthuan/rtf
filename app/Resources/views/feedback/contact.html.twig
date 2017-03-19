@@ -1,0 +1,13 @@
+<div id="small-dialog4" class="mfp-hide">
+    <h3>{{'feedback'|trans()}}</h3> 
+    <div class="feedback-grids">
+        <form id="contactForm" action="" method="post">
+            <div class="feedback-grid">
+                {% include 'feedback/contactForm.html.twig' with {'form': form} %}
+            </div>
+            <div class="button-bottom">
+                <input type="submit" value="{{ 'Send'|trans() }}" class="btn btn-success pull-right" />
+            </div>
+        </form>
+    </div>
+</div>

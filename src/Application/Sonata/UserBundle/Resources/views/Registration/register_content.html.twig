@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <div class="form">
+        <div class="lock"></div>
+            <div class="clr"></div>
+            <div class="login-options">{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}</div>
+            <a class="facebook" href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="Facebook">Facebook</a>
+            <div class="clr"><hr /></div>
+        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" 
+              class="register-form">
+
+            {{ form_widget(form) }}
+
+  
+            <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success pull-right" />
+            <p class="message">Already registered? <a href="{{ path('fos_user_security_login') }}">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</a></p>
+        </form>
+    </div>
+{% endblock main %}

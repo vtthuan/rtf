@@ -1,0 +1,38 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Application\Sonata\NewsBundle\Entity\Post;
+use Application\Sonata\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Table(name="buyings")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BuyingRepository")
+ */
+class Buying extends UpdatableEntity
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="buyings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\NewsBundle\Entity\Post", inversedBy="buyings")
+     */
+    private $post;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $token;
+    
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     */
+    private $quantity;
+
+}

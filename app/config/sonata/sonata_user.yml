@@ -1,0 +1,54 @@
+#
+# more information can be found here http://sonata-project.org/bundles/user
+#
+# Enable Doctrine to map the provided entities
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    FOSUserBundle: ~
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+
+# if you change the class configuration, please also alter the fos_user.yml file
+sonata_user:       
+                
+    security_acl:             false
+    table:
+        user_group:           fos_user_user_group
+
+    class:
+        user: Application\Sonata\UserBundle\Entity\User
+        group: Application\Sonata\UserBundle\Entity\Group
+#    impersonating:
+#        route:                page_slug
+#        parameters:           { path: / }
+
+    manager_type:             orm
+
+    profile:
+        register:
+            form:
+                type:               front_user_registration
+                handler:            sonata.user.registration.form.handler.default
+                name:               front_user_registration_form
+                validation_groups:
+                    - Registration
+
+        dashboard:
+            blocks:
+#                - { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> <p>This is a sample user profile dashboard, feel free to override it in the configuration! Want to make this text dynamic? For instance display the user's name? Create a dedicated block and edit the configuration!</p>"} }
+                - { position: left, type: app.block.my_videos}
+                - { position: left, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 5, mode: public }}
+        menu:
+            - { route: 'sonata_user_profile_show', label: 'sonata_profile_title', domain: 'SonataUserBundle'}
+            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+        form:
+            type:                 front_user_profile
+            handler:              sonata.user.profile.form.handler.default
+            name:                 front_user_profile_form
+            validation_groups:
+                # Defaults:
+                - Profile
+                - Default

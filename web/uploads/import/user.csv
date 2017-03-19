@@ -1,0 +1,3 @@
+username;email;password;admin
+admin;admin@yahoo.com;admin;true
+thierry;thierry@yahoo.com;123456;false

@@ -1,0 +1,146 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Table(name="videos")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VideoRepository")
+ */
+class Video extends UpdatableEntity
+{
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+    */
+    private $youtubeId;   
+    
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Subtitle", mappedBy="video")
+     */
+    private $subtitles;    
+
+    /**
+     *
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    private $title;
+    
+    /**
+     * Set youtubeId
+     *
+     * @param string $youtubeId
+     * @return Video
+     */
+    public function setYoutubeId($youtubeId)
+    {
+        $this->youtubeId = $youtubeId;
+
+        return $this;
+    }
+
+    /**
+     * Get youtubeId
+     *
+     * @return string 
+     */
+    public function getYoutubeId()
+    {
+        return $this->youtubeId;
+    }
+
+    /**
+     * Add subtitles
+     *
+     * @param \AppBundle\Entity\Subtitle $subtitles
+     * @return Video
+     */
+    public function addSubtitle(\AppBundle\Entity\Subtitle $subtitles)
+    {
+        $this->subtitles[] = $subtitles;
+
+        return $this;
+    }
+
+    /**
+     * Remove subtitles
+     *
+     * @param \AppBundle\Entity\Subtitle $subtitles
+     */
+    public function removeSubtitle(\AppBundle\Entity\Subtitle $subtitles)
+    {
+        $this->subtitles->removeElement($subtitles);
+    }
+
+    /**
+     * Get subtitles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubtitles()
+    {
+        return $this->subtitles;
+    }
+    
+    /**
+     * Get subtitle fr
+     *
+     */
+    public function getMainSubtitle()
+    {
+        foreach ($this->subtitles as $value) {
+            if($value->getLang() == 'fr')
+            {
+                return $value;
+            }
+        }
+    }
+    
+    /**
+     * Get subtitle en file path
+     *
+     */
+    
+    public function getMainSubtitleFilePath()
+    {
+        $sub = $this->getMainSubtitle();
+        if($sub != null)
+        {
+            return $sub->getFilePath();
+        }            
+        return '';
+    }
+    
+     /**
+     * Get subtitle en
+     *
+     */
+    public function getLearnSubtitle()
+    {
+        foreach ($this->subtitles as $value) {
+            if($value->getLang() == 'vi')
+            {
+                return $value;
+            }
+        }
+    }
+    
+     /**
+     * Get subtitle vi file path
+     *
+     */
+    public function getgetLearnSubtitleFilePath()
+    {
+        $sub = $this->getLearnSubtitle();
+        if($sub != null)
+        {
+            return $sub->getFilePath();
+        }            
+        return '';
+    }
+    
+}

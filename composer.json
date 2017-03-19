@@ -1,0 +1,101 @@
+{
+    "name": "tan.thuan.vo/tube.france",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/symfony": "2.8.*",
+		"symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+		
+		"jms/serializer-bundle": "~0.11",
+		
+        "doctrine/orm": "^2.4.8",
+        "doctrine/doctrine-bundle": "~1.4",
+		
+        "sensio/distribution-bundle": "~5.0",
+        "sensio/framework-extra-bundle": "^3.0",
+		"sensio/generator-bundle": "2.3",
+		
+        "incenteev/composer-parameter-handler": "~2.0",
+		
+        "sonata-project/easy-extends-bundle": "~2.1",
+        "sonata-project/intl-bundle": "~2.1",
+        "sonata-project/admin-bundle": "~2.2",
+        "sonata-project/doctrine-orm-admin-bundle": "~2.2",
+        "sonata-project/block-bundle": "~2.2",
+        "sonata-project/media-bundle": "~2.2",
+        "sonata-project/user-bundle": "2.2.*@dev",
+        "sonata-project/cache-bundle": "~2.1",
+        "sonata-project/page-bundle": "~2.3",
+        "sonata-project/formatter-bundle": "~2.3",
+        "sonata-project/news-bundle": "~2.3",
+        "sonata-project/classification-bundle": "~2.2",
+        "sonata-project/datagrid-bundle": "2.2.*@dev",
+		
+        "knplabs/knp-menu-bundle": "~2.0",
+        "friendsofsymfony/rest-bundle": "^1.7",
+
+        "knplabs/knp-markdown-bundle": "~1.2",
+        "egeloen/ckeditor-bundle": "~2.2",
+
+        "jms/di-extra-bundle": "~1.4",
+        "jms/payment-core-bundle": "^1.1",
+        "jms/payment-paypal-bundle": "^1.0",
+        "symfony/assetic-bundle": "^2.8",
+        "white-october/pagerfanta-bundle": "~1.0",
+        "friendsofsymfony/elastica-bundle": "3.1",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+		
+		"hwi/oauth-bundle": "0.4.*@dev",
+        "antimattr/google-bundle": "~2.0@stable"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "~2.7"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+			"env-map": {
+				"database_host": "RDS_HOSTNAME",
+				"database_port": "RDS_PORT",
+				"database_name": "RDS_DB_NAME",
+				"database_user": "RDS_USERNAME",
+				"database_pass": "RDS_PASSWORD"
+			}
+        }
+    }
+}

@@ -1,0 +1,158 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
+/**
+ * @ORM\Table(name="subtitles")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SubtitleRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Subtitle extends UpdatableEntity
+{
+    const SERVER_PATH_TO_UPLOAD_SUBTITLE_FOLDER = 'upload/subtitles/';
+    const SERVER_PATH_TO_SAVED_SUBTITLE_FOLDER = 'subtitles/';
+    
+    /**
+     * @ORM\ManyToOne(
+     *      targetEntity="Application\Sonata\MediaBundle\Entity\Media",
+     *      inversedBy="subtitles",
+     *      cascade={"persist"}
+     * )
+     */
+    private $video;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Language")
+    */
+    private $lang;
+    
+    /**
+     * @ORM\Column(type="string")
+    */
+    private $fileName;
+    
+    private $file;
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
+    /**
+    * Manages the copying of the file to the relevant place on the server
+    */
+   public function upload()
+    {
+       // the file property can be empty if the field is not required
+       if (null === $this->getFile()) {
+           return;
+       }
+
+       // we use the original file name here but you should
+       // sanitize it at least to avoid any security issues
+       
+       // set the path property to the filename where you've saved the file
+//       $this->fileName = $this->getFile()->getClientOriginalName();
+//       
+//       // move takes the target directory and target filename as params
+       $this->getFile()->move(
+           Subtitle::SERVER_PATH_TO_UPLOAD_SUBTITLE_FOLDER,
+           $this->fileName
+       );
+//       
+       
+
+       // clean up the file property as you won't need it anymore
+       $this->setFile(null);
+    }
+    
+    /**
+    * Lifecycle callback to upload the file to the server
+    */
+    public function lifecycleFileUpload() {
+       $this->upload();
+    }
+
+    /**
+    * Updates the hash value to force the preUpdate and postUpdate events to fire
+    */
+    public function refreshUpdated() {
+       $this->setModifiedAt(new \DateTime());
+    }
+    
+    public static function getEntityName()
+    {
+        return get_called_class();
+    }
+    
+
+    function get_file_extension($file_name) {
+	return substr(strrchr($file_name,'.'),1);
+    }
+
+    /**
+     * Set video
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $video
+     * @return Subtitle
+     */
+    public function setVideo(\Application\Sonata\MediaBundle\Entity\Media $video = null)
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    /**
+     * Get video
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    /**
+     * Set lang
+     *
+     * @param \AppBundle\Entity\Language $lang
+     * @return Subtitle
+     */
+    public function setLang(\AppBundle\Entity\Language $lang = null)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return \AppBundle\Entity\Language 
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+}

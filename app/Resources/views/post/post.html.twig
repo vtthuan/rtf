@@ -1,0 +1,263 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="text-align: center">
+    </div>
+    <div class="show-top-grids">
+        <div class="col-sm-8 single-left">
+            <div class="song">
+                <div class="song-info">
+                    <div class="song-info-title">
+                        <h3>{{post.title}}</h3>	
+                    </div>
+                    <div class="song-grid-right">
+                        <div class="share">
+                            <ul>
+                                <li class="view">{{post.viewCount + post.viewInit}} vues</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="published">
+                    <div class="load_more">	
+                        <ul id="myList">
+                            <li>
+                                <h4>publié le {{post.publicationDateStart |localizeddate('short', 'short')}}</h4>
+                                <p>{{post.rawContent}}</p>
+                            </li>
+                            <li>
+                                <p>Nullam fringilla sagittis tortor ut rhoncus. Nam vel ultricies erat, vel sodales leo. Maecenas pellentesque, est suscipit laoreet tincidunt, ipsum tortor vestibulum leo, ac dignissim diam velit id tellus. Morbi luctus velit quis semper egestas. Nam condimentum sem eget ex iaculis bibendum. Nam tortor felis, commodo faucibus sollicitudin ac, luctus a turpis. Donec congue pretium nisl, sed fringilla tellus tempus in.</p>
+                                <p>Nullam fringilla sagittis tortor ut rhoncus. Nam vel ultricies erat, vel sodales leo. Maecenas pellentesque, est suscipit laoreet tincidunt, ipsum tortor vestibulum leo, ac dignissim diam velit id tellus. Morbi luctus velit quis semper egestas. Nam condimentum sem eget ex iaculis bibendum. Nam tortor felis, commodo faucibus sollicitudin ac, luctus a turpis. Donec congue pretium nisl, sed fringilla tellus tempus in.</p>
+                                <div class="load-grids">
+                                    <div class="load-grid">
+                                        <p>Category</p>
+                                    </div>
+                                    <div class="load-grid">
+                                        <a href="movies.html">Entertainment</a>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="video-grid">
+                    <div>
+                        <div class="html5-video-player">
+						<div class="html5-main-video video-stream">
+                                <video class="video-stream" id="player1" style="height:375px;width:640px;">
+                                    <!-- Pseudo HTML5 -->
+                                    <source type="video/youtube" src="http://www.youtube.com/watch?v={{post.image.providerReference}}&cc_load_policy=0" />
+                                    {% if(post.getSubtitleByCode(languageLearning)) %}
+                                        <track id="{{languageLearning}}" kind="subtitles" srclang="{{languageLearning}}" src="{{ asset( post.getSubtitleByCode(languageLearning).getClientFilePath)}}" default=""></track>
+                                    {% endif%} 
+
+                                    {% if(post.getSubtitleByCode(nativeLanguage.code)) %}
+                                        <track id="{{nativeLanguage.code}}" kind="subtitles" srclang="{{nativeLanguage.code}}" src="{{ asset( post.getSubtitleByCode(nativeLanguage.code).getClientFilePath)}}" default=""></track>
+                                    {% endif%}
+                                </video>
+								<div id="subtitlesContainer" style="display:none">
+        <div id='seekLeft' class='arrow' ></div>
+        <div id='seekRight' class='arrow'></div>
+
+        <span id='subLearning' class='subtitle-text'>fr</span>
+        <span id='subNative' class='subtitle-text'>vi</span>
+    </div>
+								</div>
+                        </div>
+						 
+                    </div>
+                </div>
+            </div>					
+            <div class="clearfix"> </div>
+	{% render(controller('SonataNewsBundle:Post:comments', {'postId': post.id })) %}
+        </div>
+        <div class="col-md-4 single-right">
+            <h3>A suivre</h3>
+            {% for relativePost in relativesPosts %}
+                <div class="single-grid-right">
+                    <div class="single-right-grids">
+                        <div class="col-md-4 single-right-grid-left">
+                            <a href="{{ path('article_detail', { slug: relativePost.slug}) }}">{% thumbnail relativePost.image, 'small' %}</a>
+                        </div>
+                        <div class="col-md-8 single-right-grid-right">
+                            <a class="title" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.title}}</a>
+                            <p class="author"><a class="author" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.author.username}}</a></p>
+                            <p class="views">{{relativePost.viewCount | number_format(0,' ', '.') }} vues</p>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>					
+                </div>
+            {% endfor %}            
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    {% block custom_body %}
+    {% endblock %}
+
+
+    <span id="player1-mode"></span>
+    <div id='current-time'></div>
+        <div id="selectedWord"></div>
+        <div id="translations"></div>
+   
+{% endblock %}
+
+{% block child_scripts %}
+    <script>
+        $(document).ready(function () {
+            size_li = $("#myList li").size();
+            x = 1;
+            $('#myList li:lt(' + x + ')').show();
+            $('#loadMore').click(function () {
+                x = (x + 1 <= size_li) ? x + 1 : size_li;
+                $('#myList li:lt(' + x + ')').show();
+            });
+            $('#showLess').click(function () {
+                x = (x - 1 < 0) ? 1 : x - 1;
+                $('#myList li').not(':lt(' + x + ')').hide();
+            });
+        });
+    </script>
+    <script src="{{ asset('asset/js/mediaelement-and-player.js') }}"></script>
+    <script>
+        var trackPrincipal;
+        var languagePrincipal = '{{languageLearning}}';
+        var trackSecond;
+        var languageSecond = '{{nativeLanguage.code}}';
+        var spanNative = $('#subNative');
+        var spanLearning = $('#subLearning');
+        var played = false;
+        var paused = false;
+
+        var previousEntry, nextEntry = null;
+
+        var duration = 0;
+        var logged = false;
+        {% if app.user %}
+            logged = true;
+        {% endif %}
+
+            var chargeSubtitle = function (currentTime) {
+
+                if (trackPrincipal !== null && trackPrincipal.isLoaded) {
+                    for (i = 0; i < trackPrincipal.entries.times.length; i++) {
+                        if (currentTime >= trackPrincipal.entries.times[i].start && currentTime <= trackPrincipal.entries.times[i].stop) {
+                            // Set the line before the timecode as a class so the cue can be targeted if needed
+                            spanLearning.html(trackPrincipal.entries.text[i]).attr('class', 'mejs-captions-text ' + languagePrincipal + (' ' + trackPrincipal.entries.times[i].identifier || ''));
+                            spanNative.html(trackSecond.entries.text[i]).attr('class', 'mejs-captions-text ' + languageSecond + (' ' + trackSecond.entries.times[i].identifier || ''));
+                            if (i > 0)
+                            {
+                                if (i == 1)
+                                {
+                                    previousEntry = trackPrincipal.entries.times[0];
+                                } else {
+                                    previousEntry = trackPrincipal.entries.times[i];
+                                }
+
+                            } else
+                            {
+                                previousEntry = null;
+                            }
+
+                            if (i <= trackPrincipal.entries.times.length - 2)
+                            {
+                                if (i == trackPrincipal.entries.times.length - 2)
+                                {
+                                    nextEntry = trackPrincipal.entries.times[i + 1];
+                                } else
+                                {
+                                    nextEntry = trackPrincipal.entries.times[i + 2];
+                                }
+
+                            } else
+                            {
+                                nextEntry = null;
+                            }
+                            return; // exit out if one is visible;
+                        }
+                    }
+                }
+            }
+
+        {% block custom_script %}
+        {% endblock %}
+
+            $(document).ready(function () {
+                $('video').mediaelementplayer({features: ['playpause', 'progress', 'current', 'tracks'],
+                    success: function (media, node, player) {
+                        media.addEventListener('timeupdate', function (e) {
+                            duration = media.duration;
+                            controlFlow(media);
+                            chargeSubtitle(media.currentTime);
+                            document.getElementById('current-time').innerHTML = media.currentTime;
+
+                        }, false);
+
+
+                        for (var j = 0; j < player.tracks.length; j++)
+                        {
+                            if (player.tracks[j].srclang == languagePrincipal)
+                            {
+                                trackPrincipal = player.tracks[j];
+
+                            } else
+                            {
+                                trackSecond = player.tracks[j];
+                            }
+                        }
+                        
+                        
+
+                        $('#seekLeft').click(function () {
+                            if (previousEntry !== null)
+                            {
+                                media.setCurrentTime(previousEntry.start);
+                                chargeSubtitle(previousEntry.start);
+                            }
+                        });
+
+                        $('#seekRight').click(function () {
+                            if (nextEntry !== null)
+                            {
+                                media.setCurrentTime(nextEntry.start);
+                                chargeSubtitle(nextEntry.start);
+                            }
+                        });
+
+                        media.addEventListener('play', function (e) {
+							 $("#subtitlesContainer").show();
+                        }, false);
+
+                        media.addEventListener('pause', function (e) {
+                        }, false);
+
+                        media.addEventListener('seeked', function (e) {
+                            chargeSubtitle(media.currentTime);
+                        }, false);
+
+                        $("#subtitlesContainer").mouseenter(function (event)
+                        {
+                            //video is stoping va bien chua dc gan
+                            if (!media.paused)
+                            {
+                                paused = true;
+                                media.pause();
+                            }
+
+                        }).mouseleave(function (event)
+                        {
+                            if (paused)
+                            {
+                                paused = false;
+                                media.play();
+                            }
+
+                        })
+                    }
+                }
+                );
+            });
+    </script>
+{% endblock %}
+

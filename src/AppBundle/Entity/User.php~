@@ -1,0 +1,130 @@
+<?php
+// src/AppBundle/Entity/User.php
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @ORM\Column(type="string", length=2)
+     *
+     * @Assert\NotBlank(message="Please enter your language.", groups={"Registration", "Profile"})     * 
+     */
+    protected $languageLearn = "vi";
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $balance = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $orderNumber = 0;
+    
+    /**
+     *
+     * @ORM\OnetoMany(targetEntity="Buying", mappedBy="user")
+     */
+    protected $buyings;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+    
+     /**
+     * Get balance
+     *
+     * @return string 
+     */
+    public function getBalance()
+    {
+        return $this->balance;
+    }
+
+    /**
+     * Set languageLearn
+     *
+     * @param string $languageLearn
+     * @return User
+     */
+    public function setLanguageLearn($languageLearn)
+    {
+        $this->languageLearn = $languageLearn;
+
+        return $this;
+    }
+
+    /**
+     * Get languageLearn
+     *
+     * @return string 
+     */
+    public function getLanguageLearn()
+    {
+        return $this->languageLearn;
+    }
+
+    /**
+     * Set balance
+     *
+     * @param integer $balance
+     * @return User
+     */
+    public function setBalance($balance)
+    {
+        $this->balance = $balance;
+
+        return $this;
+    }
+
+    /**
+     * Add buyings
+     *
+     * @param \AppBundle\Entity\Buying $buyings
+     * @return User
+     */
+    public function addBuying(\AppBundle\Entity\Buying $buyings)
+    {
+        $this->buyings[] = $buyings;
+
+        return $this;
+    }
+
+    /**
+     * Remove buyings
+     *
+     * @param \AppBundle\Entity\Buying $buyings
+     */
+    public function removeBuying(\AppBundle\Entity\Buying $buyings)
+    {
+        $this->buyings->removeElement($buyings);
+    }
+
+    /**
+     * Get buyings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBuyings()
+    {
+        return $this->buyings;
+    }
+}

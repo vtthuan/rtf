@@ -1,0 +1,13 @@
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+
+        sonata.block.service.text:
+
+# NewsBundle's Blocks
+        sonata.news.block.recent_comments:
+        sonata.news.block.recent_posts:
+
+        app.block.my_videos:

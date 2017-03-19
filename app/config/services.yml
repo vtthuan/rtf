@@ -1,0 +1,83 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+    appbundle.oauth.user_provider.class: AppBundle\OAuth\UserProvider
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    sonata.news.manager.post:
+        class : Application\Sonata\NewsBundle\Entity\PostManager
+        arguments: ['%sonata.news.manager.post.entity%', '@doctrine']
+
+    sonata.news.admin.post:
+        class: Application\Sonata\NewsBundle\Admin\PostAdmin
+        tags:
+            - { name: sonata.admin,manager_type: orm, group:"sonata_blog", label:"Posts"}
+        arguments: [null,Application\Sonata\NewsBundle\Entity\Post, SonataAdminBundle:CRUD]
+
+    user.form.register.type:
+        class: Application\Sonata\UserBundle\Form\Type\RegisterType
+        parent: fos_user.registration.form.type
+        tags:
+            - { name: form.type, alias: front_user_registration  }
+
+    user.form.profile.type:
+        class: Application\Sonata\UserBundle\Form\Type\EditProfileType
+        parent: sonata.user.profile.form.type
+        tags:
+            - { name: form.type, alias: front_user_profile  }
+            
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.twig.intl_extension:
+        public: false
+        class:  Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    app.user_helper:
+        class: AppBundle\Utils\UserHelper
+        arguments:    ['%defaultNativeLanguage%']
+
+    app.motor_search:
+        class: AppBundle\Service\MotorSearch
+        arguments: ['@fos_elastica.finder.sonata_admin.post']
+
+    app.form.contact_message:
+        class: AppBundle\Form\Type\ContactType
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: form.type }
+        
+    post_search_type:
+        class: AppBundle\Form\Type\PostSearchType
+        tags:
+           -  { name: form.type }
+
+    contact_type:
+        class: AppBundle\Form\Type\ContactType
+        tags:
+           -  { name: form.type }
+    import.csvtoarray:
+        class: AppBundle\Service\ConvertCsvToArray
+
+    app.block.my_videos:
+        class: AppBundle\Block\MyVideosBlockService
+        arguments:
+            - app_bundle.block.my_videos
+            - "@templating"
+            - "@doctrine.orm.entity_manager"
+            - "@security.context"
+        tags:
+            - { name: sonata.block }
+
+    appbundle.oauth.user_provider:
+        class: %appbundle.oauth.user_provider.class%
+        arguments: ['@fos_user.user_manager', { facebook: facebookId }]

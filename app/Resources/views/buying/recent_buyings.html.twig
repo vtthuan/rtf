@@ -1,0 +1,21 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post panel panel-default">
+        {% if settings.title %}
+            <div class="panel-heading">
+                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title|trans }}</h3>
+            </div>
+        {% endif %}
+
+        <div class="panel-body">
+            {% include 'buying/list_buyings.html.twig' with { 'buyings': buyings} %}    
+            
+            {% if buyings|length > settings.max %}
+            <div class="panel-heading">
+                <a href="{{ url('buying_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'view_all_buyings'|trans }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

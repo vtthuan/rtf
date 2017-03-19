@@ -1,0 +1,35 @@
+<?php
+// src/AppBundle/Entity/User.php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="views")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TicketTypeRepository")
+ */
+class View extends UpdatableEntity
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="$views")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     */
+    private $post;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $token;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+}

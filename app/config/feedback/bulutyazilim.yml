@@ -1,0 +1,3 @@
+twig:
+    globals:
+        admin_base_view: '::ojs_base.html.twig'

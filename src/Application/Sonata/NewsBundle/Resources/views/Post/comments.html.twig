@@ -1,0 +1,30 @@
+
+<div class="all-comments">
+    <div class="all-comments-info">
+        <h3>{{ 'title_comments'|trans({}, 'SonataNewsBundle') }}</h3>
+
+        {% render(controller('SonataNewsBundle:Post:addCommentForm', {
+                'postId': postId,
+                'form': false
+            })) %}
+    </div>
+    <div class="media-grids">
+        {% for comment in pager.results %}
+            <div class="media">
+                <h5>{{comment.name}}</h5>
+                <div class="media-left">
+                    <a href="#">
+
+                    </a>
+                </div>
+                <div class="media-body">
+                    <p>{{comment.message}}</p>
+                    <span>{{ comment.createdAt | format_date }}</span>
+                </div>
+            </div>
+        {% else %}
+            {{ 'no_comments_available'|trans({}, 'SonataNewsBundle') }}
+        {% endfor %}
+    </div>
+</div>
+</div>

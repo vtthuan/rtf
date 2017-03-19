@@ -1,0 +1,12 @@
+
+<div class="recommended">
+    <div class="recommended-grids">
+        <div class="recommended-info">
+            <h3><a href="{{ path('category_detail', { id: category.id, language:language }) }}">
+                    {{ category.name }}
+                </a></h3>
+        </div>
+        {{ include ('category/listPosts.html.twig', { 'category': category, 'language': language}) }}  
+    </div>
+</div>  
+

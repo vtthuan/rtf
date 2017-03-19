@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+    <div class="form">
+        {% block sonata_user_login %}
+            <div class="lock"></div>
+            <div class="clr"></div>
+            <div class="login-options">{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}</div>
+            <a class="facebook" href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="Facebook">Facebook</a>
+            <div class="clr"><hr /></div>
+
+            {% block sonata_user_login_error %}
+                {% if error %}
+                    <div class="alert alert-danger alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+                {% endif %}
+            {% endblock %}
+
+            {% block sonata_user_login_form %}
+
+                <form action="{{ path("fos_user_security_check") }}" method="post" role="form" class="login-form">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                    <input name="username" placeholder="{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}" 
+                           type="text" value="{{ last_username }}"
+                           required="required" size="70" onClick="border: 1px solid #30a8da;" id="username"/>
+                    <input type="text" id="password" placeholder="{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}"
+                           name="_password" required="required"/>
+
+
+                    <div class="checkbox">
+                        <label for="remember_me">
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                            {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                        </label>
+                        <p class="message" ><a href="{{ path('fos_user_resetting_request') }}">{{ 'forgotten_password'|trans({}, 'SonataUserBundle') }}</a></p>
+                    </div>
+
+                    
+                    <input type="submit" id="_submit" name="_submit" class="btn btn-primary"
+                           value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+
+                    <p class="message">Not registered? <a href="{{ path('fos_user_registration_register') }}">Create an account</a></p>
+                </form>
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endblock main %}

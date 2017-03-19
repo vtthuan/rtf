@@ -1,0 +1,5 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<div class="container">
+{{order.id}} est enregistré. Une nouvelle balance {{order.ticket.quantity}} est ajoutée. Votre balance est {{app.user.balance}}
+{% endblock %}
