@@ -13,7 +13,7 @@
                     <div class="song-grid-right">
                         <div class="share">
                             <ul>
-                                <li class="view">{{post.viewCount + post.viewInit}} vues</li>
+                                <li class="view">{{ (post.viewCount + post.viewInit)|number_format(0, ',',' ') }} vues</li>
                             </ul>
                         </div>
                     </div>
@@ -22,8 +22,8 @@
                     <div class="load_more">	
                         <ul id="myList">
                             <li>
-                                <h4>publié le {{post.publicationDateStart |localizeddate('short', 'short')}}</h4>
-                                <p>{{post.rawContent}}</p>
+                                <h4>Publié le {{post.publicationDateStart |localizeddate('short', 'short')}}</h4>
+                                <p>{{ post.rawContent|length > 50 ? post.rawContent|slice(0, 50) ~ '...' : post.rawContent  }}</p>
                             </li>
                             <li>
                                 <p>Nullam fringilla sagittis tortor ut rhoncus. Nam vel ultricies erat, vel sodales leo. Maecenas pellentesque, est suscipit laoreet tincidunt, ipsum tortor vestibulum leo, ac dignissim diam velit id tellus. Morbi luctus velit quis semper egestas. Nam condimentum sem eget ex iaculis bibendum. Nam tortor felis, commodo faucibus sollicitudin ac, luctus a turpis. Donec congue pretium nisl, sed fringilla tellus tempus in.</p>
@@ -70,7 +70,8 @@
                 </div>
             </div>					
             <div class="clearfix"> </div>
-	{% render(controller('SonataNewsBundle:Post:comments', {'postId': post.id })) %}
+            {% if app.user %} {%render(controller('SonataNewsBundle:Post:comments', {'postId': post.id }))%} {% endif %}
+
         </div>
         <div class="col-md-4 single-right">
             <h3>A suivre</h3>

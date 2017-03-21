@@ -1002,5 +1002,9 @@ div.mejs-speed-button {
 	color: #ffffff;
 }
 
+.mejs-captions-button{
+	display: none;
+}
+
 /* End: Skip Back */
 

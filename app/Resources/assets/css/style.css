@@ -19,7 +19,7 @@ body a {
   -ms-transition: 0.5s all;
 }
 a.navbar-brand {
-   padding: 0 0 0 1em;
+   padding: 0 0 0 30px;
 }
 nav.navbar.navbar-inverse.navbar-fixed-top {
     padding: 1.5em 0;
@@ -137,7 +137,7 @@ form.navbar-form.navbar-right {
 }
 .main {
 	padding-bottom : 10px;
-	padding-top : 35px;
+	padding-top : 5px;
 	background-color: #F1F1F1 !important;
 	padding-right : 40px;
 	padding-left : 40px;
@@ -2118,6 +2118,7 @@ background: url(../images/social.png) no-repeat 0px 0px;
 	.try-right-left {
 		margin-bottom: 2em;
 	}
+
 }
 @media (max-width: 800px) {
 	form.navbar-form.navbar-right {
