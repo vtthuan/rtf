@@ -74,22 +74,28 @@
 
         </div>
         <div class="col-md-4 single-right">
-            <h3>A suivre</h3>
-            {% for relativePost in relativesPosts %}
-                <div class="single-grid-right">
-                    <div class="single-right-grids">
-                        <div class="col-md-4 single-right-grid-left">
-                            <a href="{{ path('article_detail', { slug: relativePost.slug}) }}">{% thumbnail relativePost.image, 'small' %}</a>
+            <div>
+                <h3>Détails</h3>
+                <div id="translations"></div>
+            </div>
+            <div>
+                <h3>A suivre</h3>
+                {% for relativePost in relativesPosts %}
+                    <div class="single-grid-right">
+                        <div class="single-right-grids">
+                            <div class="col-md-4 single-right-grid-left">
+                                <a href="{{ path('article_detail', { slug: relativePost.slug}) }}">{% thumbnail relativePost.image, 'small' %}</a>
+                            </div>
+                            <div class="col-md-8 single-right-grid-right">
+                                <a class="title" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.title}}</a>
+                                <p class="author"><a class="author" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.author.username}}</a></p>
+                                <p class="views">{{relativePost.viewCount | number_format(0,' ', '.') }} vues</p>
+                            </div>
+                            <div class="clearfix"> </div>
                         </div>
-                        <div class="col-md-8 single-right-grid-right">
-                            <a class="title" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.title}}</a>
-                            <p class="author"><a class="author" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.author.username}}</a></p>
-                            <p class="views">{{relativePost.viewCount | number_format(0,' ', '.') }} vues</p>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>					
-                </div>
-            {% endfor %}            
+                    </div>
+                {% endfor %}
+            </div>
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -100,7 +106,6 @@
     <span id="player1-mode"></span>
     <div id='current-time'></div>
         <div id="selectedWord"></div>
-        <div id="translations"></div>
    
 {% endblock %}
 

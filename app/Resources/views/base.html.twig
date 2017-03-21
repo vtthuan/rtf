@@ -35,7 +35,7 @@
                     <div class="header-top-right">
                         {% if not app.user %}
                             <div class="signin">
-                                <a href="{{ path('fos_user_security_login') }}" class="play-icon popup-with-zoom-anim">{{'link_login'|trans({}, 'SonataUserBundle')}}</a>
+                                <a href="{{ path('fos_user_security_login') }}">{{'link_login'|trans({}, 'SonataUserBundle')}}</a>
                             </div>
                         {% else %}
                             <div class="dropdown">
