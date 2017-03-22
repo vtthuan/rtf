@@ -19,7 +19,7 @@ body a {
   -ms-transition: 0.5s all;
 }
 a.navbar-brand {
-   padding: 0 0 0 1em;
+   padding: 0 0 0 30px;
 }
 nav.navbar.navbar-inverse.navbar-fixed-top {
     padding: 1.5em 0;
@@ -63,7 +63,7 @@ form.navbar-form.navbar-right {
     border: 1px solid #ccc;
 }
 .top-search form input[type="submit"] {
-    background: url(../images/9.png) no-repeat 0px 0px !important;
+    background: url(../../images/9.png) no-repeat 0px 0px !important;
     width: 18px !important;
     height: 18px !important;
     border: none !important;
@@ -137,7 +137,7 @@ form.navbar-form.navbar-right {
 }
 .main {
 	padding-bottom : 10px;
-	padding-top : 35px;
+	padding-top : 5px;
 	background-color: #F1F1F1 !important;
 	padding-right : 40px;
 	padding-left : 40px;
@@ -317,7 +317,7 @@ position: absolute;
   text-decoration: none;
   height: 40px;
   width: 40px;
-  background: transparent url("../images/themes.png") no-repeat left top;
+  background: transparent url("../../images/themes.png") no-repeat left top;
   margin-top: -65px;
 }
 .callbacks_nav:active {
@@ -411,7 +411,7 @@ position: absolute;
 ul.social-slide li i{
 	width:70px;
 	height:74px;
-	background:url(../images/img-resources.png)no-repeat;
+	background:url(../../images/img-resources.png)no-repeat;
 	display: inline-block;
 	margin:0px 15px;
 }
@@ -585,7 +585,7 @@ a.btn.btn-primary.btn-lg.see-button.hvr-shutter-out-horizontal {
     color: #21DEEF;
     text-decoration: none;
     padding-left: 1.8em;
-    background: url(../images/u12.png) no-repeat 0px 1px;
+    background: url(../../images/u12.png) no-repeat 0px 1px;
 }
 .resent-grid-info p.author a.author:hover{
     text-decoration: none;
@@ -775,7 +775,7 @@ color: rgba(255, 255, 255, 0.54);
     cursor: pointer;
     color: #B3B3B3;
     border: none;
-    background: url(../images/select-arrow.png) no-repeat 95% center;
+    background: url(../../images/select-arrow.png) no-repeat 95% center;
     border: solid 1px #B3B3B3;
     border-radius: 3px;
     font-size: 12px;
@@ -796,7 +796,7 @@ color: rgba(255, 255, 255, 0.54);
     border: none;
 }
 .footer-bottom ul li a.f-history{
-    background: url(../images/12.png) no-repeat 11px 8px;
+    background: url(../../images/12.png) no-repeat 11px 8px;
     color: #B3B3B3;
     text-decoration: none;
     font-size: 12px;
@@ -810,7 +810,7 @@ color: rgba(255, 255, 255, 0.54);
     -ms-border-radius: 3px;
 }
 .footer-bottom ul li a.f-help{
-  background: url(../images/13.png) no-repeat 11px 7px;
+  background: url(../../images/13.png) no-repeat 11px 7px;
 }
 .footer-bottom ul li a.f-help:focus {
     outline: none;
@@ -872,36 +872,36 @@ select.form-control.bfh-countries:hover {
     line-height: 2em;
 }
 .share li a.icon{
-    background: url(../images/like.png) no-repeat 0px 0px;
+    background: url(../../images/like.png) no-repeat 0px 0px;
     height: 34px;
     display: block;
 }
 .share li a.fb-icon{
-    background: url(../images/fb.png) no-repeat 0px 0px;
+    background: url(../../images/fb.png) no-repeat 0px 0px;
 }
 .share li a.rss-icon{
-    background: url(../images/rss.png) no-repeat 0px 0px;
+    background: url(../../images/rss.png) no-repeat 0px 0px;
 }
 .share li a.dribbble-icon{
-    background: url(../images/dribbble.png) no-repeat 0px 0px;
+    background: url(../../images/dribbble.png) no-repeat 0px 0px;
 }
 .share li a.twitter-icon{
-    background: url(../images/twitter.png) no-repeat 0px 0px;
+    background: url(../../images/twitter.png) no-repeat 0px 0px;
 }
 .share li a.pinterest-icon{
-    background: url(../images/pinterest.png) no-repeat 0px 0px;
+    background: url(../../images/pinterest.png) no-repeat 0px 0px;
 }
 .share li a.behance-icon{
-    background: url(../images/behance.png) no-repeat 0px 0px;
+    background: url(../../images/behance.png) no-repeat 0px 0px;
 }
 .share li a.whatsapp-icon{
-    background: url(../images/whatsapp.png) no-repeat 0px 0px;
+    background: url(../../images/whatsapp.png) no-repeat 0px 0px;
 }
 .share li a.comment-icon{
-    background: url(../images/comment.png) no-repeat 0px 0px;
+    background: url(../../images/comment.png) no-repeat 0px 0px;
 }
 .share li.view{
-    background: url(../images/view.png) no-repeat 0px 0px;
+    background: url(../../images/view.png) no-repeat 0px 0px;
     height: 34px;
     display: block;
     padding-left: 3em;
@@ -1480,7 +1480,7 @@ span.glyphicon.glyphicon-user {
 }
 /*-- developers --*/
 .developers-banner{
-  background: url(../images/dev-img.jpg) no-repeat 0px 0px;
+  background: url(../../images/dev-img.jpg) no-repeat 0px 0px;
   background-size: cover;
   padding: 14em 0 10em 0;
 }
@@ -1523,7 +1523,7 @@ span.glyphicon.glyphicon-user {
 }
 /*-- creators --*/
 .creators-banner{
-  background: url(../images/create.jpg) no-repeat 0px -105px !important;
+  background: url(../../images/create.jpg) no-repeat 0px -105px !important;
   background-size: cover !important;
 }
 .creators-grids{
@@ -1610,7 +1610,7 @@ span.glyphicon.glyphicon-user {
 }
 /*-- try --*/
 .try-banner{
-    background: url(../images/try-banner.jpg) no-repeat 0px 1px !important;
+    background: url(../../images/try-banner.jpg) no-repeat 0px 1px !important;
     background-size: cover;
 }
 .try-left-info{
@@ -1733,7 +1733,7 @@ span.glyphicon.glyphicon-user {
     color: #9E9E9E;
     margin: 1em 0;
     text-decoration: none;
-    background: url(../images/h-arrow.png) no-repeat 0px 4px;
+    background: url(../../images/h-arrow.png) no-repeat 0px 4px;
     padding-left: 1.5em;
 }
 .upload-right-bottom-left ul li a:hover{
@@ -1764,19 +1764,19 @@ span.glyphicon.glyphicon-user {
 	margin:0 .3em;
 }
 .side-bottom-icons ul li a.facebook{
-background: url(../images/social.png) no-repeat 0px 0px;
+background: url(../../images/social.png) no-repeat 0px 0px;
     width: 30px;
     height: 30px;
     display: block;
 }
 .side-bottom-icons ul li a.twitter{
-    background: url(../images/social.png) no-repeat -30px 0px;
+    background: url(../../images/social.png) no-repeat -30px 0px;
 }
 .side-bottom-icons ul li a.chrome{
-    background: url(../images/social.png) no-repeat -60px 0px;
+    background: url(../../images/social.png) no-repeat -60px 0px;
 }
 .side-bottom-icons ul li a.dribbble{
-    background: url(../images/social.png) no-repeat -90px 0px;
+    background: url(../../images/social.png) no-repeat -90px 0px;
 }
 .side-bottom-icons ul li a.facebook:hover{
 	opacity:.5;
@@ -2118,6 +2118,7 @@ background: url(../images/social.png) no-repeat 0px 0px;
 	.try-right-left {
 		margin-bottom: 2em;
 	}
+
 }
 @media (max-width: 800px) {
 	form.navbar-form.navbar-right {
@@ -2500,7 +2501,7 @@ background: url(../images/social.png) no-repeat 0px 0px;
 		top: 74% !important;
 	}
 	.creators-banner {
-		background: url(../images/create.jpg) no-repeat -11px 1px !important;
+		background: url(../../images/create.jpg) no-repeat -11px 1px !important;
 		background-size: cover !important;
 	}
 }
@@ -2692,7 +2693,7 @@ background: url(../images/social.png) no-repeat 0px 0px;
 		font-size: 12px;
 	}
 	.creators-banner {
-		background: url(../images/create.jpg) no-repeat -118px 0px !important;
+		background: url(../../images/create.jpg) no-repeat -118px 0px !important;
 		background-size: cover !important;
 		padding: 3em 0;
 	}
@@ -2763,7 +2764,7 @@ background: url(../images/social.png) no-repeat 0px 0px;
 		font-size: 12px;
 	}
 	.try-banner {
-		background: url(../images/try-banner.jpg) no-repeat 0px 1px !important;
+		background: url(../../images/try-banner.jpg) no-repeat 0px 1px !important;
 		background-size: cover;
 	}
 	.footer-bottom ul li a.f-history {

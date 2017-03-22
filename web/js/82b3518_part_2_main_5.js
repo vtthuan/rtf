@@ -37,14 +37,17 @@ jQuery(document).ready(function () {
         {
             word = $.trim(word);
             $.get(Routing.generate('translate_word', {source: languagePrincipal, target: languageSecond, word: word}), function (data) {
-				$hoverText.notify(data, 
-				{
-					position : "right top",
-					clickToHide: true,
-					className : 'success',
-					style : 'bootstrap'
-					
-				});
+                $(".panel-translation").removeClass('hide');
+                $("#translations").html(data);
+
+                // $hoverText.notify(data,
+				// {
+				// 	position : "right top",
+				// 	clickToHide: true,
+				// 	className : 'success',
+				// 	style : 'bootstrap'
+				//
+				// });
             });
         }
     });

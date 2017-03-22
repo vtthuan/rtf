@@ -60,8 +60,8 @@
         <div id='seekLeft' class='arrow' ></div>
         <div id='seekRight' class='arrow'></div>
 
-        <span id='subLearning' class='subtitle-text'>fr</span>
-        <span id='subNative' class='subtitle-text'>vi</span>
+        <span id='subLearning' class='subtitle-text'></span>
+        <span id='subNative' class='subtitle-text'></span>
     </div>
 								</div>
                         </div>
@@ -73,12 +73,12 @@
             {% if app.user %} {%render(controller('SonataNewsBundle:Post:comments', {'postId': post.id }))%} {% endif %}
 
         </div>
-        <div class="col-md-4 single-right">
-            <div>
-                <h3>Détails</h3>
+        <div class="col-md-4">
+            <div class="panel-translation single-right hide">
+                <h4>Détails</h4>
                 <div id="translations"></div>
             </div>
-            <div>
+            <div class="single-right">
                 <h3>A suivre</h3>
                 {% for relativePost in relativesPosts %}
                     <div class="single-grid-right">
@@ -104,8 +104,8 @@
 
 
     <span id="player1-mode"></span>
-    <div id='current-time'></div>
-        <div id="selectedWord"></div>
+
+    <div id="selectedWord"></div>
    
 {% endblock %}
 
@@ -196,7 +196,6 @@
                             duration = media.duration;
                             controlFlow(media);
                             chargeSubtitle(media.currentTime);
-                            document.getElementById('current-time').innerHTML = media.currentTime;
 
                         }, false);
 
