@@ -1,0 +1,9 @@
+<div id="favorite-popup-dialog" class="mfp-hide">
+    <h3>{{favorite.phrase}}</h3> 
+    <div class="grids">
+        <video class="video-stream" id="player1" style="height:375px;width:640px;">
+			<!-- Pseudo HTML5 -->
+			<source type="video/youtube" src="https://www.youtube.com/embed/{{favorite.post.image.providerReference}}?start={{favorite.start}}&end={{favorite.end}}&autoplay=1" />
+		</video>
+    </div>
+</div>

@@ -68,6 +68,14 @@ class Post extends BasePost
      * )
      */
     private $buyings;
+
+    /**
+     * @ORM\OneToMany(
+     *      targetEntity="AppBundle\Entity\Favorite",
+     *      mappedBy="post")
+     * )
+     */
+    private $favorites;
     
     /**
      * @ORM\OneToMany(

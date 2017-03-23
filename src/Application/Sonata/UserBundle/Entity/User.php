@@ -60,6 +60,28 @@ class User extends BaseUser
      * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Buying", mappedBy="user")
      */
     protected $buyings;
+
+    /**
+     *
+     * @ORM\OnetoMany(targetEntity="AppBundle\Entity\Favorite", mappedBy="user")
+     */
+    protected $favorites;
+
+    /**
+     * @return mixed
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param mixed $favorites
+     */
+    public function setFavorites($favorites)
+    {
+        $this->favorites = $favorites;
+    }
     
     /**
      *

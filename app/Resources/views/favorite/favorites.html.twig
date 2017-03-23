@@ -1,0 +1,28 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post panel panel-default">
+        {% if settings.title %}
+            <div class="panel-heading">
+                <h3 class="sonata-news-block-recent-post panel-title"><i class="fa fa-pencil"></i> {{ settings.title|trans }}</h3>
+            </div>
+        {% endif %}
+
+        <div class="panel-body">            
+			{% if(favorites|length > 0 ) %}
+				{% for favorite in favorites %}
+					<tr>
+						<td><a href="{{ path('post_detail_full', { slug: buying.post.slug, language : app.user.nativeLanguage.code, token: buying.token }) }}">
+								{{ favorite.phrase}}
+							</a></td>         
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td colspan="4" align="center">{{ 'Vous n''avez pas encore de favoris'|trans }}</td>
+				</tr>
+			{% endif %}
+
+        </div>
+    </div>
+{% endblock %}
