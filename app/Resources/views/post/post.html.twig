@@ -60,7 +60,7 @@
         <div id='seekLeft' class='arrow' ></div>
         <div id='seekRight' class='arrow'></div>
 
-        <span id='subLearning' class='subtitle-text'></span>
+        <a id="favorite" onclick="addFavorite(currentTrack);">Favoris</a><span id='subLearning' class='subtitle-text'></span>
         <span id='subNative' class='subtitle-text'></span>
     </div>
 								</div>
@@ -127,6 +127,21 @@
     </script>
     <script src="{{ asset('asset/js/mediaelement-and-player.js') }}"></script>
     <script>
+
+        function addFavorite(track) {
+            $.post(Routing.generate('add_favorite', track), function (data) {
+
+
+                // $hoverText.notify(data,
+                // {
+                // 	position : "right top",
+                // 	clickToHide: true,
+                // 	className : 'success',
+                // 	style : 'bootstrap'
+                //
+                // });
+            });
+        }
         var trackPrincipal;
         var languagePrincipal = '{{languageLearning}}';
         var trackSecond;
@@ -135,7 +150,8 @@
         var spanLearning = $('#subLearning');
         var played = false;
         var paused = false;
-
+        var currentTrack = new Object;
+        currentTrack.post = {{ post.id}};
         var previousEntry, nextEntry = null;
 
         var duration = 0;
@@ -152,6 +168,10 @@
                             // Set the line before the timecode as a class so the cue can be targeted if needed
                             spanLearning.html(trackPrincipal.entries.text[i]).attr('class', 'mejs-captions-text ' + languagePrincipal + (' ' + trackPrincipal.entries.times[i].identifier || ''));
                             spanNative.html(trackSecond.entries.text[i]).attr('class', 'mejs-captions-text ' + languageSecond + (' ' + trackSecond.entries.times[i].identifier || ''));
+
+                            currentTrack.from = trackPrincipal.entries.times[i].start;
+                            currentTrack.to = trackPrincipal.entries.times[i].stop;
+
                             if (i > 0)
                             {
                                 if (i == 1)

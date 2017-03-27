@@ -393,9 +393,15 @@ button::-moz-focus-inner {
 
 .panel-translation{
   min-height: 200px;
+  margin-bottom: 10px;
 }
+
 #translations {
   font-size: 20px;
+}
+
+.mejs-captions-button{
+  display: none;
 }
 
 .mfp-close {
