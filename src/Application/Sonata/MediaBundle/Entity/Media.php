@@ -39,6 +39,16 @@ class Media extends BaseMedia
     {
         return $this->id;
     }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $duration;
+
+    public function getDuration()
+    {
+        return $this->duration;
+    }
     
     public static function getEntityName()
     {

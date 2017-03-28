@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="fos_user_user")
  * @ORM\Entity
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="gender", column=@ORM\Column(type="string", name="gender", length=10)),
+ * })
  */
 class User extends BaseUser
 {

@@ -57,7 +57,8 @@
         "friendsofsymfony/jsrouting-bundle": "^1.6",
 		
 		"hwi/oauth-bundle": "0.4.*@dev",
-        "antimattr/google-bundle": "~2.0@stable"
+        "antimattr/google-bundle": "~2.0@stable",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
