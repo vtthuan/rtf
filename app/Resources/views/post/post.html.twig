@@ -60,7 +60,8 @@
         <div id='seekLeft' class='arrow' ></div>
         <div id='seekRight' class='arrow'></div>
 
-        <a id="favorite" onclick="addFavorite(currentTrack);">Favoris</a><span id='subLearning' class='subtitle-text'></span>
+        {#<a id="favorite" onclick="addFavorite(currentTrack);">Favoris</a>#}
+        <span id='subLearning' class='subtitle-text'></span>
         <span id='subNative' class='subtitle-text'></span>
     </div>
 								</div>
@@ -129,17 +130,8 @@
     <script>
 
         function addFavorite(track) {
-            $.post(Routing.generate('add_favorite', track), function (data) {
+            $.post(Routing.generate('add_favorite'), track, function (data) {
 
-
-                // $hoverText.notify(data,
-                // {
-                // 	position : "right top",
-                // 	clickToHide: true,
-                // 	className : 'success',
-                // 	style : 'bootstrap'
-                //
-                // });
             });
         }
         var trackPrincipal;
@@ -169,8 +161,10 @@
                             spanLearning.html(trackPrincipal.entries.text[i]).attr('class', 'mejs-captions-text ' + languagePrincipal + (' ' + trackPrincipal.entries.times[i].identifier || ''));
                             spanNative.html(trackSecond.entries.text[i]).attr('class', 'mejs-captions-text ' + languageSecond + (' ' + trackSecond.entries.times[i].identifier || ''));
 
-                            currentTrack.from = trackPrincipal.entries.times[i].start;
-                            currentTrack.to = trackPrincipal.entries.times[i].stop;
+                            currentTrack.from = Math.floor(trackPrincipal.entries.times[i].start);
+                            currentTrack.to = Math.ceil(trackPrincipal.entries.times[i].stop);
+                            currentTrack.content = decodeURIComponent(trackPrincipal.entries.text[i].replace(/\+/g, ' '));
+
 
                             if (i > 0)
                             {
