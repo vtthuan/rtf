@@ -11,7 +11,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\MediaBundle\Model\Media;
+use Application\Sonata\MediaBundle\Entity\Media;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,17 +30,13 @@ class YoutubeController extends Controller
             exit;
         }
 
-
-        $em = $this->getDoctrine();
-        $qb = $em->getRepository(Media::getEntityName());
-        $medias = $qb->createQueryBuilder('u')
-            ->where('u.duration IS NOT NULL')
-            ->getQuery()->execute();
-
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(Media::getEntityName());
+        $medias = $repository->findAll();
         foreach ($medias as $media) {
             if($media->getDuration() == null)
             {
-                $video = $media->providerReference;
+                $video = $media->getProviderReference();
 
                 $url = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=contentDetails',$video,$apiKey);
                 try {
@@ -59,7 +55,10 @@ class YoutubeController extends Controller
                         echo(curl_error($ch));
 
                     $data = json_decode($response, true);
-                    return new Response($this->covtime($data['items'][0]['contentDetails']['duration']));
+                    $media->setDuration($this->covtime($data['items'][0]['contentDetails']['duration']));
+
+                    $em->persist($media);
+                    $em->flush();
 
                 } catch(Exception $e) {
                     trigger_error(sprintf(
@@ -70,7 +69,8 @@ class YoutubeController extends Controller
                 }
             }
         }
-        return new Response('a');
+
+        return new Response('Success');
 
     }
 

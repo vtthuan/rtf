@@ -44,7 +44,7 @@ class Media extends BaseMedia
 
     public function setDuration($duration)
     {
-        return $this->url = $duration;
+        return $this->duration = $duration;
         return $this;
     }
     
