@@ -10,13 +10,11 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Symfony\Component\HttpFoundation\Response;
 use Sonata\MediaBundle\Model\Media;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-use GuzzleHttp;
 
 class YoutubeController extends Controller
 {
@@ -31,26 +29,66 @@ class YoutubeController extends Controller
             echo missingApiKeyWarning();
             exit;
         }
-        $client = new Client();
 
-        $em = $this->getDoctrine()->getManager();
-        //$words = $em->getRepository(Media::getEntityName())->findPossibleWords($word);
 
-        $video = 'JptwkEhdNfY';
-        $format = 'https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=contentDetails';
-        // send an asynchronous request.
+        $em = $this->getDoctrine();
+        $qb = $em->getRepository(Media::getEntityName());
+        $medias = $qb->createQueryBuilder('u')
+            ->where('u.duration IS NOT NULL')
+            ->getQuery()->execute();
 
-        $request = new GuzzleHttp\Psr7\Request('GET', sprintf($format, $video, $apiKey));
-        $promise = $client->sendAsync($request)->then(function ($response) {
-            echo 'I completed! ' . $response->getBody();
-        });
-        $promise->wait();
-        //$request = $client->createRequest('GET', sprintf($format, $video, $apiKey), ['future' => true]);
+        foreach ($medias as $media) {
+            if($media->getDuration() == null)
+            {
+                $video = $media->providerReference;
 
-        // callback
-//        $client->send($request)->then(function ($response) {
-//            echo 'I completed! ';
-//            $json = $response->json();
-//        });
+                $url = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=contentDetails',$video,$apiKey);
+                try {
+                    $ch = curl_init();
+
+                    if (FALSE === $ch)
+                        throw new Exception('failed to initialize');
+
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    $response = curl_exec($ch);
+
+                    if (FALSE === $response)
+                        echo(curl_error($ch));
+
+                    $data = json_decode($response, true);
+                    return new Response($this->covtime($data['items'][0]['contentDetails']['duration']));
+
+                } catch(Exception $e) {
+                    trigger_error(sprintf(
+                        'Curl failed with error #%d: %s',
+                        $e->getCode(), $e->getMessage()),
+                        E_USER_ERROR);
+
+                }
+            }
+        }
+        return new Response('a');
+
+    }
+
+    // convert youtube v3 api duration e.g. PT1M3S to HH:MM:SS
+    function covtime($yt){
+        $yt=str_replace('PT','',$yt);
+        foreach(['H','M','S'] as $a){
+            $pos=strpos($yt,$a);
+            if($pos!==false) ${$a}=substr($yt,0,$pos); else { ${$a}=0; continue; }
+            $yt=substr($yt,$pos+1);
+        }
+        if($H>0){
+            $M=str_pad($M,2,'0',STR_PAD_LEFT);
+            $S=str_pad($S,2,'0',STR_PAD_LEFT);
+            return "$H:$M:$S";
+        } else {
+            $S=str_pad($S,2,'0',STR_PAD_LEFT);
+            return "$M:$S";
+        }
     }
 }
