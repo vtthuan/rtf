@@ -34,11 +34,12 @@ class YoutubeController extends Controller
         $repository = $em->getRepository(Media::getEntityName());
         $medias = $repository->findAll();
         foreach ($medias as $media) {
-            if($media->getDuration() == null)
+            if($media->getProviderName() == "sonata.media.provider.youtube" && $media->getDuration() == null)
             {
                 $video = $media->getProviderReference();
 
                 $url = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=contentDetails',$video,$apiKey);
+				var_dump($url);
                 try {
                     $ch = curl_init();
 
@@ -55,10 +56,12 @@ class YoutubeController extends Controller
                         echo(curl_error($ch));
 
                     $data = json_decode($response, true);
-                    $media->setDuration($this->covtime($data['items'][0]['contentDetails']['duration']));
+			
+					$media->setDuration($this->covtime($data['items'][0]['contentDetails']['duration']));
 
-                    $em->persist($media);
-                    $em->flush();
+					$em->persist($media);
+					$em->flush();
+					
 
                 } catch(Exception $e) {
                     trigger_error(sprintf(
