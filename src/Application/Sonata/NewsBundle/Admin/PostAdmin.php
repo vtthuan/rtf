@@ -65,11 +65,6 @@ class PostAdmin extends Admin
             ->with('group_classification', array(
                 'class' => 'col-md-4',
                 ))
-                ->add('tags', 'sonata_type_model_autocomplete', array(
-                    'property' => 'name',
-                    'multiple' => 'true',
-                    'required' => false,
-                ))
                 ->add('collection', 'sonata_type_model_list', array('required' => false))
             ->end()
         ;
