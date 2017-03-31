@@ -2,6 +2,7 @@
 
 {% block main %}   
     <div class="main-grids">
+        {%render(controller('AppBundle:Category:recent'))%}
         {% for category in categories %}
             {{ include('category/category_detail.html.twig', { 'category': category, 'language': language}) }}    
         {% endfor %}

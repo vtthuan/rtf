@@ -52,4 +52,21 @@ class CategoryController extends Controller {
         
         return $this->render('category/category_detail.html.twig', array('category' => $collection, 'language'=> $language));
     }
+
+    /**
+     * @Route("/", name="category_recent")
+     */
+    public function recentAction()
+    {
+
+        $postRepository = $this->getDoctrine()->getRepository(Post::getEntityName());
+
+        $posts = $postRepository->findBy(array(), array('createdAt'=>'desc'), 3, 0);
+
+        $helper = $this->get('app.user_helper');
+
+        return $this->render('category/recent_post.html.twig', array('posts'=> $posts,  'language'=> $helper->findLanguage($this->getUser())));
+
+
+    }
 }

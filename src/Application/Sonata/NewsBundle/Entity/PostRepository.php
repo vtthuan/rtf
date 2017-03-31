@@ -30,10 +30,10 @@ class PostRepository extends BasePostRepository
     {        
         if($number != 0)
         {
-            return $this->findBy(array('collection' => $collection, 'enabled' => true), array('viewCount' => 'desc'), $number, 0);  
+            return $this->findBy(array('collection' => $collection, 'enabled' => true), array('createdAt' => 'desc'), $number, 0);  
         }
         else {
-            return $this->findBy(array('collection' => $collection, 'enabled' => true), array('viewCount' => 'desc'));  
+            return $this->findBy(array('collection' => $collection, 'enabled' => true), array('createdAt' => 'desc'));  
         }
     }
     

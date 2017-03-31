@@ -1,4 +1,4 @@
-{% for post in category.posts %}
+{% for post in posts %}
 	<div class="col-md-2 resent-grid recommended-grid slider-first">
 		<div class="resent-grid-img recommended-grid-img">
 			<a href="{{ path('article_detail', { slug: post.slug}) }}">{% thumbnail post.image, 'small' %}</a>
@@ -16,7 +16,7 @@
 					<p class="author author-info"><a href="#" class="author">{{post.author.username}}</a></p>
 				</div>
 				<div class="slid-bottom-grid slid-bottom-right">
-					<p class="views views-info">{{post.viewCount|number_format(0, ',',' ') }} vues</p>
+					<p class="views views-info">{{post.image.viewCount|number_format(0, ',',' ') }} vues</p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

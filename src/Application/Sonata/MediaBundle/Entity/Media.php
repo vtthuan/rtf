@@ -37,6 +37,33 @@ class Media extends BaseMedia
      */
     protected $duration;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $viewCount = 0;
+
+    /**
+     * Set price
+     *
+     * @param int $count
+     * @return Post
+     */
+    public function setViewCount($count)
+    {
+        $this->viewCount = $count;
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return int
+     */
+    public function getViewCount()
+    {
+        return $this->viewCount;
+    }
+
     public function getDuration()
     {
         return $this->duration;

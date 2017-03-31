@@ -46,11 +46,7 @@ class Post extends BasePost
      * @ORM\Column(type="integer")
      */
     private $price = 0;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $viewCount = 0;
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -124,28 +120,6 @@ class Post extends BasePost
         return $this->price;
     }
     
-        /**
-     * Set price
-     *
-     * @param int $count
-     * @return Post
-     */
-    public function setViewCount($count)
-    {
-        $this->viewCount = $count;
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return int 
-     */
-    public function getViewCount()
-    {
-        return $this->viewCount;
-    }
-    
     /**
      * Get title
      *
@@ -201,7 +175,7 @@ class Post extends BasePost
         }
         return null;
     }
-    
+
     public static function getEntityName()
     {
       return get_called_class();

@@ -38,7 +38,7 @@ class YoutubeController extends Controller
             {
                 $video = $media->getProviderReference();
 
-                $url = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=contentDetails',$video,$apiKey);
+                $url = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=statistics,contentDetails',$video,$apiKey);
 				var_dump($url);
                 try {
                     $ch = curl_init();
@@ -59,6 +59,7 @@ class YoutubeController extends Controller
 			
 					$media->setDuration($this->covtime($data['items'][0]['contentDetails']['duration']));
 
+					$media->setViewCount($data['items'][0]['statistics']['viewCount']);
 					$em->persist($media);
 					$em->flush();
 					
