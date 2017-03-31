@@ -44,7 +44,7 @@ class User extends BaseUser
     
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(min=7, max=100, minMessage="user.password.short", groups={"Registration","Profile"})
+     * @Assert\Length(min=4, max=100, minMessage="user.password.short", groups={"Registration","Profile"})
      */
     protected $plainPassword;
     
@@ -89,7 +89,6 @@ class User extends BaseUser
     /**
      *
      * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Language")
-     * @Assert\NotBlank(message="Please enter your native language.", groups={"Registration", "Profile"})
      */
     protected $nativeLanguage;
     
