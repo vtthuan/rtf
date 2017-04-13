@@ -13,7 +13,7 @@
                     <div class="song-grid-right">
                         <div class="share">
                             <ul>
-                                <li class="view">{{ (post.viewCount + post.viewInit)|number_format(0, ',',' ') }} vues</li>
+                                <li class="view">{{ (post.image.viewCount + post.viewInit)|number_format(0, ',',' ') }} vues</li>
                             </ul>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <div class="col-md-8 single-right-grid-right">
                                 <a class="title" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.title}}</a>
                                 <p class="author"><a class="author" href="{{ path('article_detail', { slug: relativePost.slug}) }}">{{relativePost.author.username}}</a></p>
-                                <p class="views">{{relativePost.viewCount | number_format(0,' ', '.') }} vues</p>
+                                <p class="views">{{relativePost.image.viewCount | number_format(0,' ', '.') }} vues</p>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
