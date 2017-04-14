@@ -23,8 +23,7 @@ parameters:
     defaultNativeLanguage : vi
 
     # elastic search
-    elastic_host: localhost
-    elastic_port: 9200
+    elastic_url: https://search-rtf-3spysuaudhjszuhyyqa2ucegha.eu-central-1.es.amazonaws.com:443
 
     #oauth facebook
     oauth.facebook.id: "id_app"
