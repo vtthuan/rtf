@@ -1,7 +1,7 @@
 fos_elastica:
     clients:
-        default: { host: %elastic_host%, port: %elastic_port% }
-
+        default: { url: https://search-rtf-3spysuaudhjszuhyyqa2ucegha.eu-central-1.es.amazonaws.com:443, curl: {CURLOPT_SSL_VERIFYPEER:false}}
+            
     indexes:
         sonata_admin:
             index_name: app_%kernel.environment%
