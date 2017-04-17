@@ -5,9 +5,9 @@
             <div class="time small-time slider-time">
 				<p>{{post.image.duration}}</p>
 			</div>
-			<div class="clck small-clck">
+{#			<div class="clck small-clck">
 				<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-			</div>
+			</div>#}
 		</div>
 		<div class="resent-grid-info recommended-grid-info">
 			<h5><a href="{{ path('article_detail', { slug: post.slug}) }}" class="title">{{post.title}}</a></h5>
@@ -16,7 +16,7 @@
 					<p class="author author-info"><a href="#" class="author">{{post.author.username}}</a></p>
 				</div>
 				<div class="slid-bottom-grid slid-bottom-right">
-					<p class="views views-info">{{post.image.viewCount|number_format(0, ',',' ') }} vues</p>
+					<p class="views views-info">{{post.image.viewCount|number_format(0,' ', '.') }} vues</p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
