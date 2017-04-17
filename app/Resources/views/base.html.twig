@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}application{% endblock %}</title>
+        <title>{% block title %}RTF{% endblock %}</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
                             <div class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown">
                                     <h5>
-                                        Bonjour {{app.user.getFullname}}
+                                        Bonjour {{app.user.getUserName}}
                                         <span class="caret"></span>
                                     </h5>
                                 </a>

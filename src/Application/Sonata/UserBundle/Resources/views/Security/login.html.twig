@@ -19,12 +19,11 @@
 
                 <form action="{{ path("fos_user_security_check") }}" method="post" role="form" class="login-form">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-
-                    <input name="username" placeholder="{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}" 
+                    <input name="_username" placeholder="{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}" 
                            type="text" value="{{ last_username }}"
-                           required="required" size="70" onClick="border: 1px solid #30a8da;" id="username"/>
-                    <input type="text" id="password" placeholder="{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}"
-                           name="_password" required="required"/>
+                           required="required" size="70" id="username"/>
+                    <input id="password" placeholder="{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}"
+                           name="_password" type="password" required="required"/>
 
 
                     <div class="checkbox">
