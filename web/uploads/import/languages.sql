@@ -12,8 +12,8 @@ INSERT INTO classification__collection
 `updated_at`)
 VALUES
 (
-'Sport',
+'entertainment',
 1,
-'Sport',
+'entertainment',
 now(),
 now());

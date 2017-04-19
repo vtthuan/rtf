@@ -3,7 +3,7 @@
     <div class="recommended-grids">
         <div class="recommended-info">
             <h3><a href="{{ path('category_detail', { id: category.id, language:language }) }}">
-                    {{ category.name }}
+                    {{ category.name|capitalize  }}
                 </a></h3>
         </div>
         {{ include ('category/listPosts.html.twig', { 'posts': category.posts, 'language': language}) }}

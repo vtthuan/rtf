@@ -61,6 +61,8 @@ class PostRepository extends BasePostRepository
                 ->where('u.collection = :collection')
 		->andWhere('u.id <> :id')
                 ->setParameter('collection', $collection->getId())
+		->andWhere('u.enabled = :enabled')
+                ->setParameter('enabled', true)
 		->setParameter('id', $post->getId());
         if($count > Post::NUM_ITEMS)
         {

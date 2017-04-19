@@ -68,12 +68,9 @@ class ImportPostCommand extends ContainerAwareCommand
             if(!is_object($post)){
                 $post = new Post();
                 $post->setSlug($row['slug']);
-                $post->setEnabled(false);
             }
-            else
-            {
-                $post->setEnabled(boolval($row['enabled']));
-            }
+            
+			$post->setEnabled(boolval($row['enabled']));
             
             $user = $em->getRepository(User::getEntityName())
                        ->findOneBy(array('username' => $row['author']));
@@ -95,7 +92,6 @@ class ImportPostCommand extends ContainerAwareCommand
             $post->setIsArticle(boolval($row['isArticle']));
             $post->setPrice(intval($row['price']));
             $post->setRawContent($row['raw_content']);
-            $post->setViewCount(intval($row['viewCount']));
             $post->setCreatedAt(new \DateTime());
             $post->setUpdatedAt(new \DateTime());
 

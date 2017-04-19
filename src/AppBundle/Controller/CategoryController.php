@@ -61,7 +61,7 @@ class CategoryController extends Controller {
 
         $postRepository = $this->getDoctrine()->getRepository(Post::getEntityName());
 
-        $posts = $postRepository->findBy(array(), array('createdAt'=>'desc'), 6, 0);
+        $posts = $postRepository->findBy(array('enabled'=>true), array('createdAt'=>'desc'), 6, 0);
 
         $helper = $this->get('app.user_helper');
 
