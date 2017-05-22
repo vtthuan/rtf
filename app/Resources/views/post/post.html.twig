@@ -154,7 +154,7 @@
 
             var chargeSubtitle = function (currentTime) {
 
-                if (trackPrincipal !== null && trackPrincipal.isLoaded) {
+                if (trackPrincipal && trackPrincipal.isLoaded) {
                     for (i = 0; i < trackPrincipal.entries.times.length; i++) {
                         if (currentTime >= trackPrincipal.entries.times[i].start && currentTime <= trackPrincipal.entries.times[i].stop) {
                             // Set the line before the timecode as a class so the cue can be targeted if needed
