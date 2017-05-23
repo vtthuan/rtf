@@ -251,7 +251,9 @@ class Word extends UpdatableEntity
      "ONO" => "Onomatopée",    
      "PRE" => "Préposition",
      "PRO" => "Pronom",
-     "VER" => "Verbe"
+     "VER" => "Verbe",
+	 "ADJ:ind" => "Adjectif",
+	 "PRO:ind" => "Pronom"
     );
     
     /**
