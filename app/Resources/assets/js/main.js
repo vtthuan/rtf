@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
         //Show the word in a div so we can test the result
         if (word !== "")
         {
-            word = $.trim(word);
+            word = $.trim(word).toLowerCase();
             $.get(Routing.generate('translate_word', {source: languagePrincipal, target: languageSecond, word: word}), function (data) {
                 $(".panel-translation").removeClass('hide');
                 $("#translations").html(data);
