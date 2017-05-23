@@ -170,6 +170,10 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
   text-decoration: none;
 }
 
+.video-grid {
+	height: 66vh;
+}
+
 #wrapper {
 	margin: 50px auto;
 	width: 540px;
