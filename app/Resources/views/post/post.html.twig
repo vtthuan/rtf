@@ -47,7 +47,7 @@
 						<div class="html5-main-video video-stream">
                                 <video class="video-stream" id="player1" style="height:375px;width:640px;">
                                     <!-- Pseudo HTML5 -->
-                                    <source type="video/youtube" src="http://www.youtube.com/watch?v={{post.image.providerReference}}&cc_load_policy=0" />
+                                    <source type="video/youtube" src="http://www.youtube.com/watch?v={{post.image.providerReference}}" />
                                     {% if(post.getSubtitleByCode(languageLearning)) %}
                                         <track id="{{languageLearning}}" kind="subtitles" srclang="{{languageLearning}}" src="{{ asset( post.getSubtitleByCode(languageLearning).getClientFilePath)}}" default=""></track>
                                     {% endif%} 
@@ -204,8 +204,10 @@
         {% endblock %}
 
             $(document).ready(function () {
+
                 $('video').mediaelementplayer({features: ['playpause', 'progress', 'current', 'tracks'],
                     success: function (media, node, player) {
+							
                         media.addEventListener('timeupdate', function (e) {
                             duration = media.duration;
                             controlFlow(media);
