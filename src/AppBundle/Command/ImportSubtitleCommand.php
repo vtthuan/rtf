@@ -90,7 +90,7 @@ class ImportSubtitleCommand extends ContainerAwareCommand
                 $existed = $fs->exists($directory . $post->getId());
 				if(!$existed)
 				{
-					$fs->mkdir($directory . $post->getId(), 0700);
+					$fs->mkdir($directory . $post->getId(), 0755);
 				}				
                 
                 $newName = $post->getId()

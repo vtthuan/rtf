@@ -37,8 +37,8 @@
 
     function controlFlow(mediaElement)
     {
-        <!-- if( media.currentTime > media.duration * 10 /100) -->
-        if( mediaElement.currentTime > 10)			
+        if( media.currentTime > media.duration * 30 /100)
+        <!--if( mediaElement.currentTime > 10)		-->	
         {                          
             {% if not app.user %}
                 //show div to ask user that he has to login
